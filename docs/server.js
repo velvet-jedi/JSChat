@@ -4,7 +4,6 @@ var app = express();
 
 var mongoose = require('mongoose');
 
-
 // middleware that handles requests for static files.
 app.use(express.static(__dirname));
 
