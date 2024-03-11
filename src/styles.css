@@ -1,0 +1,42 @@
+* {
+    box-sizing: border-box;
+}
+.container {
+    background-color: antiquewhite;
+    margin: 0 auto;
+    padding: 2em;
+}
+
+.jumbotron {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+#send {
+    max-width: 4rem;
+    background-color: greenyellow;
+}
+
+.form-control, .btn {
+    border-radius: 5px;
+    border: 1px solid gray;
+    outline: none;
+}
+
+
+.form-control:focus {
+    border: 2px solid skyblue;
+    outline: none;
+}
+
+.form-control:hover {
+    background-color: aliceblue;
+}
+
+#send:hover {
+    cursor: pointer;
+    background-color: lightgreen;
+}
+
+
