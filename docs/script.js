@@ -1,6 +1,6 @@
-
-
 $(() => {
+    const socket = io(); // Connect to the Socket.io server
+
                 $("#send").click(()=>{
                     sendMessage({
                         name: $("#name").val(), 
@@ -17,7 +17,6 @@ function addMessages(message){
    
     function getMessages() {
     const url = `${window.location.origin}/messages`;
-    console.log('GET URL:', url);
 
     $.get(url, (data) => {
         data.forEach(addMessages);
@@ -26,7 +25,5 @@ function addMessages(message){
 
 function sendMessage(message) {
     const url = `${window.location.origin}/messages`;
-    console.log('POST URL:', url);
-
     $.post(url, message);
 }
