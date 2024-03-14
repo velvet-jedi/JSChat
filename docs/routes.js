@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 const Message = require('./message'); // model import
 
-// express route to get all the message from the database
-module.exports = (io) => {
+
+module.exports = (io) => {    // take io (presumably a socket.io instance) as an argument
     router.get('/messages', async (req, res) => {
         try {
             const messages = await Message.find({});
@@ -18,7 +18,7 @@ module.exports = (io) => {
         const message = new Message(req.body);
         try {
             await message.save();
-            res.status(200).send('Message sent successfully');
+            res.status(200);
             io.emit('message', req.body);
         } catch (err) {
             res.status(500).send('Internal Server Error');

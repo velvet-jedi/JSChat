@@ -1,3 +1,6 @@
+const socket = io(); // Connect to the Socket.io server
+
+
 $(() => {
     const socket = io(); // Connect to the Socket.io server
 
@@ -8,6 +11,10 @@ $(() => {
                     })
                 getMessages()
         })
+    
+        socket.on('message', (message) => {
+            addMessages(message);
+        });
     
 function addMessages(message){
    $("#messages").append(`

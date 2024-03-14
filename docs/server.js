@@ -12,7 +12,6 @@ const router = require('./routes')(io); // import routes logic
 const mongoose = require('mongoose');
 
 io.on('connection', (socket) =>{
-    console.log('a user is connected')
     socket.on('message', (message) => {
         console.log('New Message: ', message);
         io.emit('message', message);
