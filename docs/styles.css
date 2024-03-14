@@ -40,3 +40,11 @@
 }
 
 
+#messages {
+    overflow-y: scroll;
+    height: 30vh;
+    background-color: aliceblue;
+    padding: 20px;
+    border-radius: 10px;
+    font-size: smaller;
+}
