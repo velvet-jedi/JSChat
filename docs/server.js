@@ -1,36 +1,41 @@
-require('dotenv').config();
+require("dotenv").config();
 
-const express = require('express');
-const app = express();
+const express = require("express");
+const app = express(); // initialize an express app
 
+const http = require("http").Server(app); // creates an HTTP server using the http module and binds it to the Express app
+const io = require("socket.io")(http); // imports the Socket.io library and creates an instance that is tied to the HTTP server
 
-const http = require('http').Server(app);
-const io = require('socket.io')(http); // Initialize Socket.io
+const router = require("./routes")(io); // Passing io as an argument potentially allows the router to interact with Socket.io events.
 
-const router = require('./routes')(io); // import routes logic
+const mongoose = require("mongoose");
 
-const mongoose = require('mongoose');
+// Establishes a listener for the 'connection' event emitted by Socket.io
+io.on("connection", socket => {
+    // sets up a listener on the socket object for the 'message' event.
+    socket.on("message", message => {
+        // broadcasts the received message to all connected clients using the 'message' event
+        io.emit("message", message);
+    });
+});
 
-io.on('connection', (socket) =>{
-    socket.on('message', (message) => {
-        console.log('New Message: ', message);
-        io.emit('message', message);
-    })
-   })
+// using express' static middleware that handles requests for static files.
+app.use(express.static(__dirname)); // serve static HTML, JS etc files from the current directory
 
-// middleware that handles requests for static files.
-app.use(express.static(__dirname));
-
+// parsing
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // Use the router for your messages routes
-app.use('/', router);
+app.use("/", router);
 
 const connectDB = url => {
-    return mongoose.connect(url);
+    // arrow function takes URL to connect
+    return mongoose.connect(url); // returns a promise object
+    // By returning the Promise object,
+    // the function allows for handling the connection outcome (success or failure) asynchronously.
 };
-const port = process.env.PORT || 3100;
+const port = process.env.PORT || 4100;
 
 var start = async () => {
     try {
