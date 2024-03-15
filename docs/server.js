@@ -35,7 +35,7 @@ const connectDB = url => {
     // By returning the Promise object,
     // the function allows for handling the connection outcome (success or failure) asynchronously.
 };
-const port = process.env.PORT || 4100;
+const port = process.env.PORT || 3100;
 
 var start = async () => {
     try {
