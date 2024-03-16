@@ -1,4 +1,4 @@
-const socket = io().connect(window.location.origin); // Connect to the Socket.io server
+var socket = io().connect(window.location.origin); // Connect to the Socket.io server
 
 $(() => {
     $("#send").click(() => {
